@@ -1,0 +1,2690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nada Caftan & Jellaba - Luxury Moroccan Fashion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --royal-blue: #1E3A8A;
+            --warm-beige: #F5F0E6;
+            --rich-black: #0B0B0B;
+            --pure-white: #FFFFFF;
+            --soft-gray: #F8F8F8;
+            --dark-gray: #2C2C2C;
+            --royal-light: rgba(30, 58, 138, 0.1);
+            --gold: #D4AF37;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--pure-white);
+            color: var(--rich-black);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Performance optimized transitions */
+        * {
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Page Transitions - Optimized */
+        .main-page {
+            display: block;
+            opacity: 1;
+            transition: opacity 0.25s ease;
+        }
+
+        .product-page {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .main-page.hiding {
+            opacity: 0;
+        }
+
+        .product-page.showing {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--royal-blue), var(--gold));
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
+
+        /* Header */
+        .header {
+            background: var(--pure-white);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            transition: all 0.2s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--rich-black);
+            background: linear-gradient(135deg, var(--rich-black), var(--royal-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a {
+            color: var(--rich-black);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--royal-blue);
+            transition: width 0.2s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        /* Back Button */
+        .back-btn {
+            background: var(--royal-blue);
+            color: var(--pure-white);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--rich-black);
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 3px;
+            background: var(--rich-black);
+            margin: 3px 0;
+            transition: 0.2s;
+        }
+
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 80px);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            z-index: 99;
+            animation: slideDown 0.2s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .mobile-menu a {
+            font-size: 1.5rem;
+            color: var(--rich-black);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--royal-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--rich-black) 0%, var(--dark-gray) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--pure-white);
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0 0h100v100H0z" fill="none"/><path d="M20 20h60v60H20z" fill="none" stroke="%231E3A8A" stroke-width="0.5" opacity="0.3"/></svg>') repeat;
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--pure-white), var(--royal-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--royal-blue);
+            color: var(--pure-white);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(30, 58, 138, 0.4);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.3s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* Animation Classes - Optimized */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s ease;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.6s ease;
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Smart Product Filter Bar - Optimized */
+        .product-filter-bar {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(30, 58, 138, 0.1);
+            z-index: 90;
+            transform: translateY(-100%);
+            transition: transform 0.2s ease;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .product-filter-bar.visible {
+            transform: translateY(0);
+        }
+
+        .filter-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .search-container {
+            position: relative;
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--dark-gray);
+            opacity: 0.6;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 3rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            background: var(--pure-white);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--royal-blue);
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+        }
+
+        .category-filters {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .category-btn {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--royal-blue);
+            background: transparent;
+            color: var(--royal-blue);
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .category-btn:hover {
+            background: var(--royal-blue);
+            color: var(--pure-white);
+            transform: translateY(-2px);
+        }
+
+        .category-btn.active {
+            background: var(--royal-blue);
+            color: var(--pure-white);
+            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 6rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--rich-black);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .product-card {
+            background: var(--pure-white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .product-card.hidden {
+            display: none;
+        }
+
+        /* Optimized Product Image with Fixed Carousel */
+        .product-image {
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        .image-carousel {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .carousel-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            cursor: grab;
+        }
+
+        .carousel-container:active {
+            cursor: grabbing;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--pure-white);
+            transition: transform 0.35s ease, opacity 0.35s ease;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+
+        .carousel-slide.active {
+            transform: translateX(0%);
+            opacity: 1;
+        }
+
+        .carousel-slide.next {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        .carousel-slide.prev {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+
+        /* Optimized Carousel Indicators */
+        .carousel-indicators {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+            pointer-events: auto;
+        }
+
+        .indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            pointer-events: auto;
+        }
+
+        .indicator.active {
+            background: var(--pure-white);
+            transform: scale(1.3);
+            border-color: var(--pure-white);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .indicator:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 2rem;
+        }
+
+        .product-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--rich-black);
+        }
+
+        .product-description {
+            color: var(--dark-gray);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--royal-blue);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .order-button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--rich-black);
+            color: var(--pure-white);
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .order-button:hover {
+            background: var(--royal-blue);
+            transform: translateY(-2px);
+        }
+
+        .order-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s ease, height 0.3s ease;
+        }
+
+        .order-button:active::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Product Detail Page - Enhanced with Improved Performance */
+        .product-detail {
+            padding: 6rem 0;
+            min-height: 100vh;
+        }
+
+        .product-detail-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .product-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .product-detail-images {
+            position: sticky;
+            top: 120px;
+        }
+
+        /* Enhanced Main Image Container with Better Zoom Performance */
+        .main-image {
+            width: 100%;
+            height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 1rem;
+            background: var(--soft-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-in;
+            border: 3px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+
+        .main-image.zoomed {
+            cursor: zoom-out;
+            border-color: var(--royal-blue);
+        }
+
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.15s ease-out;
+            transform-origin: center center;
+            will-change: transform;
+        }
+
+        .main-image:not(.zoomed):hover {
+            border-color: var(--royal-light);
+        }
+
+        .main-image:not(.zoomed):hover img {
+            transform: scale(1.05);
+        }
+
+        .main-image.zoomed img {
+            transform: scale(2.5);
+            transition: transform 0.1s ease-out;
+        }
+
+        /* Zoom instructions overlay */
+        .zoom-hint {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            pointer-events: none;
+        }
+
+        .main-image:hover .zoom-hint {
+            opacity: 1;
+        }
+
+        /* Fallback icon for main image */
+        .main-image .fallback-icon {
+            font-size: 3rem;
+            color: var(--dark-gray);
+            opacity: 0.5;
+        }
+
+        /* Enhanced Thumbnail Images with Better Performance */
+        .thumbnail-images {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+            background: var(--soft-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .thumbnail:hover {
+            border-color: var(--royal-blue);
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.2);
+        }
+
+        .thumbnail.active {
+            border-color: var(--royal-blue);
+            box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.2);
+            transform: scale(1.05);
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.2s ease;
+        }
+
+        .thumbnail:hover img {
+            transform: scale(1.1);
+        }
+
+        .thumbnail .fallback-icon {
+            font-size: 1.5rem;
+            color: var(--dark-gray);
+            opacity: 0.5;
+        }
+
+        /* Optimized image loading overlay */
+        .image-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--royal-blue);
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .image-loading.visible {
+            opacity: 1;
+        }
+
+        .product-detail-info h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--rich-black);
+            margin-bottom: 1rem;
+        }
+
+        .product-detail-price {
+            font-size: 2rem;
+            color: var(--royal-blue);
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .product-detail-description {
+            color: var(--dark-gray);
+            line-height: 1.7;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 3rem;
+        }
+
+        .product-features li {
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-features li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-label {
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        .feature-value {
+            color: var(--rich-black);
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .action-button {
+            flex: 1;
+            padding: 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .primary-button {
+            background: var(--royal-blue);
+            color: var(--pure-white);
+        }
+
+        .primary-button:hover {
+            background: var(--rich-black);
+            transform: translateY(-2px);
+        }
+
+        .secondary-button {
+            background: transparent;
+            color: var(--royal-blue);
+            border: 2px solid var(--royal-blue);
+        }
+
+        .secondary-button:hover {
+            background: var(--royal-blue);
+            color: var(--pure-white);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--dark-gray);
+        }
+
+        .no-results h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--rich-black);
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 6rem 0;
+            background: var(--soft-gray);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: var(--pure-white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--royal-blue);
+            font-family: 'Playfair Display', serif;
+            opacity: 0.3;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--royal-blue), var(--gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .author-info h4 {
+            margin: 0;
+            color: var(--rich-black);
+            font-weight: 600;
+        }
+
+        .author-info p {
+            margin: 0;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+
+        .stars {
+            color: var(--gold);
+            margin-left: auto;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 6rem 0;
+            background: var(--rich-black);
+            color: var(--pure-white);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 2rem;
+            color: var(--pure-white);
+        }
+
+        .about-image {
+            height: 500px;
+            background: linear-gradient(135deg, var(--dark-gray), var(--royal-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: var(--pure-white);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="%23D4AF37" opacity="0.3"/><circle cx="80" cy="20" r="2" fill="%23D4AF37" opacity="0.3"/><circle cx="50" cy="50" r="2" fill="%23D4AF37" opacity="0.3"/><circle cx="20" cy="80" r="2" fill="%23D4AF37" opacity="0.3"/><circle cx="80" cy="80" r="2" fill="%23D4AF37" opacity="0.3"/></svg>') repeat;
+        }
+
+        /* Social Media Section */
+        .social-section {
+            padding: 6rem 0;
+            background: var(--soft-gray);
+            text-align: center;
+        }
+
+        .social-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 2rem;
+            color: var(--rich-black);
+        }
+
+        .social-subtitle {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            margin-bottom: 3rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem 2rem;
+            background: var(--pure-white);
+            color: var(--rich-black);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            min-width: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.3s;
+        }
+
+        .social-link:hover::before {
+            left: 100%;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .social-link.instagram:hover { background: linear-gradient(135deg, #E4405F, #F77737); color: white; }
+        .social-link.tiktok:hover { background: var(--rich-black); color: white; }
+        .social-link.facebook:hover { background: #1877F2; color: white; }
+        .social-link.whatsapp:hover { background: #25D366; color: white; }
+
+        .social-icon {
+            font-size: 1.5rem;
+        }
+
+        /* WhatsApp Section */
+        .whatsapp-section {
+            padding: 6rem 0;
+            background: var(--royal-blue);
+            text-align: center;
+            color: var(--pure-white);
+        }
+
+        .whatsapp-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 2rem;
+        }
+
+        .whatsapp-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .whatsapp-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 2rem 4rem;
+            background: var(--pure-white);
+            color: var(--royal-blue);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 15px;
+            transition: all 0.2s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .whatsapp-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            background: #25D366;
+            color: var(--pure-white);
+        }
+
+        .whatsapp-button i {
+            font-size: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--royal-blue);
+            color: var(--pure-white);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 6rem 0;
+            background: var(--pure-white);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            background: var(--soft-gray);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
+
+        .faq-question:hover {
+            background: var(--royal-light);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-answer.active {
+            max-height: 200px;
+            padding: 1.5rem;
+        }
+
+        .faq-icon {
+            transition: transform 0.2s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Optimized Ripple Effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(0);
+            animation: ripple 0.5s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Design - Optimized */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .filter-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .search-container {
+                max-width: 100%;
+            }
+
+            .category-filters {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .category-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            .products-section {
+                padding: 8rem 0 6rem 0;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                margin-top: 60px;
+            }
+
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .product-detail-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .product-detail-images {
+                position: static;
+            }
+
+            .main-image {
+                height: 400px;
+            }
+
+            .product-actions {
+                flex-direction: column;
+            }
+
+            .carousel-slide {
+                transition: transform 0.25s ease, opacity 0.25s ease;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .whatsapp-button {
+                padding: 1.5rem 2rem;
+                font-size: 1rem;
+            }
+
+            .product-filter-bar {
+                top: 60px;
+            }
+
+            .product-detail {
+                padding: 6rem 0 4rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo" onclick="showMainPage()">Nada Caftan & Jellaba</div>
+            <ul class="nav-menu" id="mainNavMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="back-btn" id="backBtn" onclick="showMainPage()">
+                <i class="fas fa-arrow-left"></i>
+                Back to Products
+            </button>
+            <div class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+        <div class="mobile-menu">
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="#about">About</a>
+            <a href="#faq">FAQ</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </header>
+
+    <!-- Main Page -->
+    <div class="main-page" id="mainPage">
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <h1>Luxury Redefined</h1>
+                <p>Handcrafted Moroccan Excellence</p>
+                <a href="#products" class="cta-button">Shop Collection</a>
+            </div>
+        </section>
+
+        <!-- Smart Product Filter Bar -->
+        <div class="product-filter-bar" id="filterBar">
+            <div class="filter-content">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search products..." class="search-input">
+                </div>
+                <div class="category-filters">
+                    <button class="category-btn active" data-category="all">All</button>
+                    <button class="category-btn" data-category="men">Men</button>
+                    <button class="category-btn" data-category="women">Women</button>
+                    <button class="category-btn" data-category="kids">Kids</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Section -->
+        <section class="products-section" id="products">
+            <div class="container">
+                <h2 class="section-title fade-in">Our Collection</h2>
+                <div class="products-grid" id="productsGrid">
+                    <!-- Products will be generated by JavaScript -->
+                </div>
+                <div class="no-results" id="noResults" style="display: none;">
+                    <h3>No Products Found</h3>
+                    <p>Try adjusting your search or category filter to find what you're looking for.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about-section" id="about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text slide-in-left">
+                        <h2>CRAFTED WITH PASSION</h2>
+                        <p>Every piece in our collection tells a story of Moroccan heritage, combining centuries-old techniques with contemporary design. Our artisans pour their hearts into creating garments that celebrate both tradition and modernity.</p>
+                        <p>From the finest fabrics to the most intricate embroidery, we ensure each caftan and jellaba meets the highest standards of luxury and authenticity.</p>
+                    </div>
+                    <div class="about-image slide-in-right">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section" id="faq">
+            <div class="container">
+                <h2 class="section-title fade-in">Frequently Asked Questions</h2>
+                <div class="faq-container">
+                    <div class="faq-item fade-in">
+                        <div class="faq-question">
+                            <span>What materials are used in your caftans and jellabas?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We use only the finest materials including pure silk, premium wool, cotton blends, and traditional Moroccan fabrics. All embroidery is done with high-quality threads, and some pieces feature genuine precious stone accents.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item fade-in">
+                        <div class="faq-question">
+                            <span>How do I choose the right size?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Our team will help you with sizing through WhatsApp. We provide detailed measurements and can customize pieces to your exact specifications. Most of our garments have a relaxed, flowing fit typical of traditional Moroccan clothing.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item fade-in">
+                        <div class="faq-question">
+                            <span>Do you ship internationally?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Right now, we only deliver within Morocco. International shipping isn't available yet, but we hope to offer it later on.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item fade-in">
+                        <div class="faq-question">
+                            <span>Can I request custom designs or colors?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Absolutely! We love creating custom pieces. Contact us through WhatsApp with your ideas, preferred colors, and any specific design elements you'd like. Custom orders typically take 2-3 weeks to complete.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item fade-in">
+                        <div class="faq-question">
+                            <span>How do I care for my caftan or jellaba?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>For best results, we recommend dry cleaning for silk pieces and hand washing in cold water for cotton blends. Detailed care instructions are included with each order. Proper care ensures your garment will last for years to come.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Media Section -->
+        <section class="social-section">
+            <div class="container">
+                <h2 class="social-title fade-in">Stay Connected</h2>
+                <p class="social-subtitle fade-in">Follow us for the latest collections and behind-the-scenes content</p>
+                <div class="social-links">
+                    <a href="#" class="social-link instagram fade-in" onclick="openSocial('instagram')">
+                        <i class="fab fa-instagram social-icon"></i>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="#" class="social-link tiktok fade-in" onclick="openSocial('tiktok')">
+                        <i class="fab fa-tiktok social-icon"></i>
+                        <span>TikTok</span>
+                    </a>
+                    <a href="#" class="social-link facebook fade-in" onclick="openSocial('youtube')">
+                        <i class="fab fa-facebook social-icon"></i>
+                        <span>YouTube</span>
+                    </a>
+                    <a href="#" class="social-link whatsapp fade-in" onclick="openWhatsApp()">
+                        <i class="fab fa-whatsapp social-icon"></i>
+                        <span>WhatsApp</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- WhatsApp Section -->
+        <section class="whatsapp-section" id="contact">
+            <div class="container">
+                <h2 class="whatsapp-title fade-in">Order via WhatsApp</h2>
+                <p class="whatsapp-subtitle fade-in">Get in touch with us directly for personalized service and quick ordering</p>
+                <a href="#" class="whatsapp-button fade-in" onclick="openWhatsApp()">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>Start WhatsApp Chat</span>
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Product Detail Page -->
+    <div class="product-page" id="productPage">
+        <section class="product-detail">
+            <div class="product-detail-container">
+                <div class="product-detail-grid">
+                    <div class="product-detail-images">
+                        <div class="main-image" id="mainImage">
+                            <img src="" alt="Product Image" id="mainImageImg" style="display: none;">
+                            <i class="fas fa-image fallback-icon"></i>
+                            <div class="zoom-hint">Click to zoom</div>
+                            <div class="image-loading" id="imageLoading">
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                        <div class="thumbnail-images" id="thumbnailImages">
+                            <!-- Thumbnails will be generated dynamically -->
+                        </div>
+                    </div>
+                    <div class="product-detail-info">
+                        <h1 id="productDetailTitle"></h1>
+                        <div class="product-detail-price" id="productDetailPrice"></div>
+                        <div class="product-detail-description" id="productDetailDescription"></div>
+                        <ul class="product-features" id="productDetailFeatures">
+                            <!-- Features will be generated dynamically -->
+                        </ul>
+                        <div class="product-actions">
+                            <button class="action-button primary-button" id="orderDetailButton">Order via WhatsApp</button>
+                            <button class="action-button secondary-button" onclick="openWhatsApp()">Ask Questions</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Enhanced Product Data with Real Image Paths
+        const products = [
+            {
+                id: 1,
+                title: "Luxury Silk Caftan",
+                price: "2,890 MAD",
+                category: "women",
+                description: "Handwoven silk caftan with traditional Moroccan embroidery and modern elegance. Perfect for special occasions and cultural celebrations.",
+                detailedDescription: "This exquisite caftan represents the pinnacle of Moroccan textile artistry. Crafted from 100% pure mulberry silk, each piece features hand-embroidered geometric patterns inspired by traditional Berber designs. The flowing silhouette is both comfortable and elegant, making it perfect for weddings, cultural events, or sophisticated evening wear.",
+                images: [
+                    { src: "pic/one.jpg", alt: "Luxury Silk Caftan - Front View" },
+                    { src:"https://cdn.pixabay.com/photo/2024/05/26/10/15/bird-8788491_1280.jpg", alt: "Luxury Silk Caftan - Detail View" },
+                    { src: "pic/one.jpg", alt: "Luxury Silk Caftan - Back View" }
+                ],
+                fallbackGradients: [
+                    "linear-gradient(135deg, #D946EF, #8B5CF6)",
+                    "linear-gradient(135deg, #10B981, #059669)",
+                    "linear-gradient(135deg, #F59E0B, #D97706)"
+                ],
+                features: [
+                    { label: "Material", value: "100% Pure Silk" },
+                    { label: "Origin", value: "Fez, Morocco" },
+                    { label: "Embroidery", value: "Hand-stitched" },
+                    { label: "Care", value: "Dry clean only" },
+                    { label: "Sizes", value: "S, M, L, XL, Custom" },
+                    { label: "Delivery", value: "5-7 business days" }
+                ]
+            },
+            {
+                id: 2,
+                title: "Premium Wool Jellaba",
+                price: "1,930 MAD",
+                category: "men",
+                description: "Classic Moroccan jellaba crafted with finest wool and intricate detailing. A timeless piece for the modern gentleman.",
+                detailedDescription: "This traditional jellaba combines authentic Moroccan craftsmanship with contemporary styling. Made from premium Merino wool, it features a distinctive hood and flowing design that has remained unchanged for centuries. The subtle embroidered details add sophistication while maintaining the garment's cultural authenticity.",
+                images: [
+                    { src: "https://i.postimg.cc/mgfyFmnb/one.png", alt: "Premium Wool Jellaba - Front" },
+                    { src: "pic/two.jpg", alt: "Premium Wool Jellaba - Hood Detail" },
+                    { src: "pic/two.jpg", alt: "Premium Wool Jellaba - Full Length" }
+                ],
+                fallbackGradients: [
+                    "linear-gradient(135deg, #0EA5E9, #1E40AF)",
+                    "linear-gradient(135deg, #8B5A2B, #6B4423)",
+                    "linear-gradient(135deg, #6B7280, #4B5563)"
+                ],
+                features: [
+                    { label: "Material", value: "Premium Merino Wool" },
+                    { label: "Origin", value: "Salé, Morocco" },
+                    { label: "Hood", value: "Traditional Style" },
+                    { label: "Care", value: "Hand wash cold" },
+                    { label: "Sizes", value: "M, L, XL, XXL, Custom" },
+                    { label: "Delivery", value: "5-7 business days" }
+                ]
+            },
+            {
+                id: 3,
+                title: "Royal Blue Collection",
+                price: "5,800 MAD",
+                category: "women",
+                description: "Exclusive limited edition pieces with royal blue threading and precious stone accents. The epitome of luxury.",
+                detailedDescription: "Our most prestigious collection features caftans adorned with genuine Swarovski crystals and gold thread embroidery. Each piece is individually numbered and comes with a certificate of authenticity. The royal blue silk is dyed using traditional methods passed down through generations of Moroccan artisans.",
+                images: [
+                    { src: "pic/three.jpg", alt: "Royal Blue Collection - Main" },
+                    { src: "pic/three.jpg", alt: "Royal Blue Collection - Crystal Details" },
+                    { src: "pic/three.jpg", alt: "Royal Blue Collection - Gold Threading" }
+                ],
+                fallbackGradients: [
+                    "linear-gradient(135deg, #1E3A8A, #3B82F6)",
+                    "linear-gradient(135deg, #7C3AED, #A855F7)",
+                    "linear-gradient(135deg, #D4AF37, #F59E0B)"
+                ],
+                features: [
+                    { label: "Material", value: "Royal Silk + Crystals" },
+                    { label: "Edition", value: "Limited (50 pieces)" },
+                    { label: "Accents", value: "Swarovski Crystals" },
+                    { label: "Threading", value: "24k Gold Thread" },
+                    { label: "Certificate", value: "Authenticity Included" },
+                    { label: "Delivery", value: "10-14 business days" }
+                ]
+            },
+            {
+                id: 4,
+                title: "Children's Cotton Caftan",
+                price: "890 MAD",
+                category: "kids",
+                description: "Beautiful miniature caftan for children with colorful embroidery and comfortable cotton fabric.",
+                detailedDescription: "Specially designed for young ones, this caftan combines comfort with traditional beauty. Made from 100% organic cotton, it's gentle on sensitive skin while showcasing vibrant colors and playful patterns that children love. Perfect for cultural celebrations and family gatherings.",
+                images: [
+                    { src: "pic/four.jpg", alt: "Children's Cotton Caftan - Colorful" },
+                    { src: "pic/four.jpg", alt: "Children's Cotton Caftan - Pattern Detail" },
+                    { src: "pic/four.jpg", alt: "Children's Cotton Caftan - Full View" }
+                ],
+                fallbackGradients: [
+                    "linear-gradient(135deg, #EC4899, #DB2777)",
+                    "linear-gradient(135deg, #F97316, #EA580C)",
+                    "linear-gradient(135deg, #10B981, #06B6D4)"
+                ],
+                features: [
+                    { label: "Material", value: "100% Organic Cotton" },
+                    { label: "Ages", value: "2-12 years" },
+                    { label: "Colors", value: "Rainbow Embroidery" },
+                    { label: "Care", value: "Machine washable" },
+                    { label: "Comfort", value: "Soft & Breathable" },
+                    { label: "Delivery", value: "3-5 business days" }
+                ]
+            },
+            {
+                id: 5,
+                title: "Traditional Djellaba",
+                price: "1,590 MAD",
+                category: "men",
+                description: "Authentic men's djellaba with hood, perfect for daily wear and special occasions.",
+                detailedDescription: "This classic djellaba represents authentic Moroccan menswear at its finest. Featuring the traditional pointed hood and loose-fitting design, it's crafted from high-quality cotton blend for year-round comfort. The subtle earth-tone colors and minimal embellishment make it versatile for both casual and formal settings.",
+                images: [
+                    { src: "pic/five.jpg", alt: "Traditional Djellaba - Classic" },
+                    { src: "pic/five.jpg", alt: "Traditional Djellaba - Hood" },
+                    { src: "pic/five.jpg", alt: "Traditional Djellaba - Earth Tones" }
+                ],
+                fallbackGradients: [
+                    "linear-gradient(135deg, #8B5A2B, #6B4423)",
+                    "linear-gradient(135deg, #78716C, #57534E)",
+                    "linear-gradient(135deg, #F59E0B, #D97706)"
+                ],
+                features: [
+                    { label: "Material", value: "Cotton Blend" },
+                    { label: "Style", value: "Traditional Cut" },
+                    { label: "Hood", value: "Pointed Design" },
+                    { label: "Season", value: "All Weather" },
+                    { label: "Colors", value: "Earth Tones" },
+                    { label: "Delivery", value: "5-7 business days" }
+                ]
+            },
+            {
+                id: 6,
+                title: "Baby Soft Jellaba",
+                price: "490 MAD",
+                category: "kids",
+                description: "Adorable baby jellaba made with ultra-soft organic cotton, perfect for special events and everyday comfort.",
+                detailedDescription: "Designed with the utmost care for the smallest family members, this baby jellaba uses only the softest organic cotton. All seams are flat-locked to prevent irritation, and the design includes snap closures for easy dressing. The gentle pastel colors and minimal decoration ensure both comfort and style.",
+                images: [
+                    { src: "pic/six.jpg", alt: "Baby Soft Jellaba - Pastel" },
+                    { src: "pic/six.jpg", alt: "Baby Soft Jellaba - Soft Texture" },
+                    { src: "pic/six.jpg", alt: "Baby Soft Jellaba - Snap Details" }
+                ],
+                fallbackGradients: [
+                    "linear-gradient(135deg, #FDE68A, #F59E0B)",
+                    "linear-gradient(135deg, #E0E7FF, #C7D2FE)",
+                    "linear-gradient(135deg, #DDD6FE, #C4B5FD)"
+                ],
+                features: [
+                    { label: "Material", value: "Ultra-soft Organic Cotton" },
+                    { label: "Ages", value: "0-24 months" },
+                    { label: "Closure", value: "Snap Buttons" },
+                    { label: "Seams", value: "Flat-locked" },
+                    { label: "Colors", value: "Gentle Pastels" },
+                    { label: "Delivery", value: "3-5 business days" }
+                ]
+            }
+        ];
+
+        // State management
+        let currentScrollDirection = 'down';
+        let lastScrollTop = 0;
+        let currentFilter = 'all';
+        let currentSearchTerm = '';
+        let productCarousels = {};
+        let currentProduct = null;
+        let currentMainImageIndex = 0;
+        let isZoomed = false;
+
+        // Initialize the website
+        document.addEventListener('DOMContentLoaded', function() {
+            generateProducts();
+            initializeScrollHandling();
+            initializeSearch();
+            initializeCategoryFilters();
+            initializeFAQ();
+            initializeObserver();
+            initializeBackToTop();
+            initializeMobileMenu();
+        });
+
+        // Fixed Page Navigation Functions
+        function showMainPage() {
+            const mainPage = document.getElementById('mainPage');
+            const productPage = document.getElementById('productPage');
+            const mainNavMenu = document.getElementById('mainNavMenu');
+            const backBtn = document.getElementById('backBtn');
+            
+            // Smooth transition
+            productPage.classList.remove('showing');
+            productPage.style.display = 'none';
+            
+            mainPage.style.display = 'block';
+            mainPage.classList.remove('hiding');
+            
+            mainNavMenu.style.display = 'flex';
+            backBtn.style.display = 'none';
+            
+            // Reset scroll position
+            window.scrollTo(0, 0);
+            
+            // Update URL without page reload
+            history.pushState({ page: 'main' }, 'Nada Caftan & Jellaba', '/');
+        }
+
+        function showProductPage(product) {
+            currentProduct = product;
+            currentMainImageIndex = 0;
+            isZoomed = false;
+            
+            const mainPage = document.getElementById('mainPage');
+            const productPage = document.getElementById('productPage');
+            const mainNavMenu = document.getElementById('mainNavMenu');
+            const backBtn = document.getElementById('backBtn');
+            
+            // Smooth transition
+            mainPage.classList.add('hiding');
+            
+            setTimeout(() => {
+                mainPage.style.display = 'none';
+                productPage.style.display = 'block';
+                productPage.classList.add('showing');
+                
+                mainNavMenu.style.display = 'none';
+                backBtn.style.display = 'flex';
+                
+                // Populate product details
+                populateProductDetails(product);
+                
+                // Reset scroll position
+                window.scrollTo(0, 0);
+            }, 250);
+            
+            // Update URL without page reload
+            history.pushState({ page: 'product', id: product.id }, product.title, `/product/${product.id}`);
+        }
+
+        // FIXED: Enhanced Populate product detail page with corrected image loading
+        function populateProductDetails(product) {
+            document.getElementById('productDetailTitle').textContent = product.title;
+            document.getElementById('productDetailPrice').textContent = product.price;
+            document.getElementById('productDetailDescription').textContent = product.detailedDescription;
+            
+            // FIXED: Properly set main image without replacing event handlers
+            const mainImageImg = document.getElementById('mainImageImg');
+            const mainImage = document.getElementById('mainImage');
+            const imageLoading = document.getElementById('imageLoading');
+            
+            // Reset zoom state
+            isZoomed = false;
+            mainImage.classList.remove('zoomed');
+            
+            // FIXED: Remove existing click handlers properly and add new ones
+            const newMainImage = mainImage.cloneNode(true);
+            mainImage.parentNode.replaceChild(newMainImage, mainImage);
+            
+            // Get the new elements after replacement
+            const finalMainImage = document.getElementById('mainImage');
+            const finalMainImageImg = document.getElementById('mainImageImg');
+            const finalImageLoading = document.getElementById('imageLoading');
+            
+            // FIXED: Add enhanced zoom functionality to new element
+            finalMainImage.addEventListener('click', handleImageZoom);
+            finalMainImage.addEventListener('mousemove', handleImageMouseMove);
+            finalMainImage.addEventListener('mouseleave', handleImageMouseLeave);
+            
+            // Show loading indicator
+            finalImageLoading.classList.add('visible');
+            
+            // FIXED: Load main image with proper error handling
+            loadImageWithFallback(
+                product.images[0].src, 
+                product.fallbackGradients[0], 
+                finalMainImageImg, 
+                finalMainImage,
+                product.images[0].alt,
+                () => finalImageLoading.classList.remove('visible')
+            );
+            
+            // FIXED: Generate thumbnails with better handling
+            const thumbnailContainer = document.getElementById('thumbnailImages');
+            thumbnailContainer.innerHTML = '';
+            
+            product.images.forEach((image, index) => {
+                const thumbnail = document.createElement('div');
+                thumbnail.className = `thumbnail ${index === 0 ? 'active' : ''}`;
+                thumbnail.onclick = () => switchMainImage(index);
+                
+                const img = document.createElement('img');
+                img.style.display = 'none';
+                
+                const fallbackIcon = document.createElement('i');
+                fallbackIcon.className = 'fas fa-image fallback-icon';
+                
+                const loadingIcon = document.createElement('i');
+                loadingIcon.className = 'fas fa-spinner fa-spin image-loading';
+                
+                thumbnail.appendChild(img);
+                thumbnail.appendChild(fallbackIcon);
+                thumbnail.appendChild(loadingIcon);
+                
+                // FIXED: Try to load thumbnail with proper fallback
+                loadImageWithFallback(
+                    image.src,
+                    product.fallbackGradients[index],
+                    img,
+                    thumbnail,
+                    image.alt,
+                    () => {
+                        if (loadingIcon.parentNode) {
+                            loadingIcon.style.display = 'none';
+                        }
+                    }
+                );
+                
+                thumbnailContainer.appendChild(thumbnail);
+            });
+            
+            // Generate features
+            const featuresContainer = document.getElementById('productDetailFeatures');
+            featuresContainer.innerHTML = '';
+            
+            product.features.forEach(feature => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span class="feature-label">${feature.label}:</span>
+                    <span class="feature-value">${feature.value}</span>
+                `;
+                featuresContainer.appendChild(li);
+            });
+            
+            // Set up order button
+            document.getElementById('orderDetailButton').onclick = () => orderProduct(product.title, product.price);
+        }
+
+        // Enhanced image zoom functionality with better UX
+        function handleImageZoom(e) {
+            if (!currentProduct) return;
+            
+            const mainImage = document.getElementById('mainImage');
+            const img = mainImage.querySelector('img');
+            
+            if (!img || img.style.display === 'none') return;
+            
+            isZoomed = !isZoomed;
+            
+            if (isZoomed) {
+                mainImage.classList.add('zoomed');
+                img.style.transformOrigin = 'center center';
+                // Update zoom hint
+                const zoomHint = mainImage.querySelector('.zoom-hint');
+                if (zoomHint) zoomHint.textContent = 'Click to zoom out';
+            } else {
+                mainImage.classList.remove('zoomed');
+                img.style.transformOrigin = 'center center';
+                // Update zoom hint
+                const zoomHint = mainImage.querySelector('.zoom-hint');
+                if (zoomHint) zoomHint.textContent = 'Click to zoom';
+            }
+        }
+
+        function handleImageMouseMove(e) {
+            if (!isZoomed || !currentProduct) return;
+            
+            const mainImage = document.getElementById('mainImage');
+            const img = mainImage.querySelector('img');
+            
+            if (!img || img.style.display === 'none') return;
+            
+            const rect = mainImage.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            
+            img.style.transformOrigin = `${Math.max(0, Math.min(100, x))}% ${Math.max(0, Math.min(100, y))}%`;
+        }
+
+        function handleImageMouseLeave() {
+            if (!isZoomed) return;
+            
+            const mainImage = document.getElementById('mainImage');
+            const img = mainImage.querySelector('img');
+            
+            if (img) {
+                img.style.transformOrigin = 'center center';
+            }
+        }
+
+        // FIXED: Switch main image in product detail page with enhanced error handling
+        function switchMainImage(index) {
+            if (!currentProduct) return;
+            
+            currentMainImageIndex = index;
+            isZoomed = false;
+            const mainImageImg = document.getElementById('mainImageImg');
+            const mainImage = document.getElementById('mainImage');
+            const imageLoading = document.getElementById('imageLoading');
+            
+            // Remove zoom state
+            mainImage.classList.remove('zoomed');
+            
+            // Show loading
+            imageLoading.classList.add('visible');
+            
+            // FIXED: Update main image with proper error handling
+            loadImageWithFallback(
+                currentProduct.images[index].src,
+                currentProduct.fallbackGradients[index],
+                mainImageImg,
+                mainImage,
+                currentProduct.images[index].alt,
+                () => {
+                    const loadingElement = document.getElementById('imageLoading');
+                    if (loadingElement) {
+                        loadingElement.classList.remove('visible');
+                    }
+                }
+            );
+            
+            // Update thumbnail active state with smooth transition
+            document.querySelectorAll('.thumbnail').forEach((thumb, i) => {
+                thumb.classList.toggle('active', i === index);
+            });
+        }
+
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', function(e) {
+            if (e.state) {
+                if (e.state.page === 'main') {
+                    showMainPage();
+                } else if (e.state.page === 'product') {
+                    const product = products.find(p => p.id === e.state.id);
+                    if (product) {
+                        showProductPage(product);
+                    }
+                }
+            } else {
+                showMainPage();
+            }
+        });
+
+        // FIXED: Enhanced Image loading with fallback and proper error handling
+        function loadImageWithFallback(imageSrc, fallbackGradient, imgElement, containerElement, altText, callback) {
+            // Create a test image to check if the source loads
+            const testImg = new Image();
+            
+            testImg.onload = function() {
+                // Image loaded successfully
+                if (imgElement && containerElement) {
+                    imgElement.src = imageSrc;
+                    imgElement.alt = altText || 'Product Image';
+                    imgElement.style.display = 'block';
+                    containerElement.style.background = 'none';
+                    
+                    // Hide fallback icon
+                    const fallbackIcon = containerElement.querySelector('.fallback-icon');
+                    if (fallbackIcon) {
+                        fallbackIcon.style.display = 'none';
+                    }
+                }
+                
+                if (callback) callback();
+            };
+            
+            testImg.onerror = function() {
+                // Image failed to load, use gradient fallback
+                if (imgElement && containerElement) {
+                    imgElement.style.display = 'none';
+                    containerElement.style.background = fallbackGradient || 'linear-gradient(135deg, #D946EF, #8B5CF6)';
+                    
+                    // Show fallback icon
+                    let fallbackIcon = containerElement.querySelector('.fallback-icon');
+                    if (!fallbackIcon) {
+                        fallbackIcon = document.createElement('i');
+                        fallbackIcon.className = 'fas fa-image fallback-icon';
+                        containerElement.appendChild(fallbackIcon);
+                    }
+                    fallbackIcon.style.display = 'block';
+                }
+                
+                if (callback) callback();
+            };
+            
+            // Set timeout to handle slow loading images
+            const timeoutId = setTimeout(() => {
+                testImg.onerror();
+            }, 5000); // 5 second timeout
+            
+            // Clear timeout if image loads
+            testImg.onload = function() {
+                clearTimeout(timeoutId);
+                if (imgElement && containerElement) {
+                    imgElement.src = imageSrc;
+                    imgElement.alt = altText || 'Product Image';
+                    imgElement.style.display = 'block';
+                    containerElement.style.background = 'none';
+                    
+                    const fallbackIcon = containerElement.querySelector('.fallback-icon');
+                    if (fallbackIcon) {
+                        fallbackIcon.style.display = 'none';
+                    }
+                }
+                if (callback) callback();
+            };
+            
+            testImg.src = imageSrc;
+        }
+
+        // Enhanced Generate product cards with optimized carousel timing
+        function generateProducts() {
+            const productsGrid = document.getElementById('productsGrid');
+            
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card fade-in';
+                productCard.setAttribute('data-category', product.category);
+                productCard.setAttribute('data-product-id', product.id);
+                
+                const imagesHtml = product.images.map((image, index) => 
+                    `<div class="carousel-slide ${index === 0 ? 'active' : index === 1 ? 'next' : 'prev'}" 
+                         style="background: ${product.fallbackGradients[index]};" data-slide-index="${index}">
+                        <i class="fas fa-image"></i>
+                    </div>`
+                ).join('');
+                
+                const indicatorsHtml = product.images.map((_, index) => 
+                    `<div class="indicator ${index === 0 ? 'active' : ''}" 
+                         data-slide="${index}" 
+                         onclick="event.stopPropagation(); goToSlide(${product.id}, ${index})"></div>`
+                ).join('');
+                
+                productCard.innerHTML = `
+                    <div class="product-image">
+                        <div class="image-carousel">
+                            <div class="carousel-container" data-product-id="${product.id}">
+                                ${imagesHtml}
+                            </div>
+                            <div class="carousel-indicators" data-product-id="${product.id}">
+                                ${indicatorsHtml}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.title}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-price">${product.price}</div>
+                        <button class="order-button" onclick="event.stopPropagation(); orderProduct('${product.title}', '${product.price}')">
+                            Order via WhatsApp
+                        </button>
+                    </div>
+                `;
+                
+                // Add click handler for opening product detail page
+                productCard.addEventListener('click', function(e) {
+                    if (!e.target.closest('.order-button') && !e.target.closest('.carousel-indicators') && !e.target.closest('.indicator')) {
+                        showProductPage(product);
+                    }
+                });
+                
+                productsGrid.appendChild(productCard);
+                
+                // Initialize carousel for this product after DOM is ready
+                setTimeout(() => {
+                    initializeProductCarousel(product.id);
+                    
+                    // Try to load actual images for carousel slides
+                    const carouselSlides = productCard.querySelectorAll('.carousel-slide');
+                    product.images.forEach((image, index) => {
+                        if (carouselSlides[index]) {
+                            loadImageForCarousel(image.src, carouselSlides[index], product.fallbackGradients[index]);
+                        }
+                    });
+                }, 50);
+            });
+        }
+
+        // Global function to control carousel from indicators
+        function goToSlide(productId, slideIndex) {
+            if (productCarousels[productId]) {
+                productCarousels[productId].goToSlide(slideIndex);
+            }
+        }
+
+        // Enhanced Load image for carousel slide
+        function loadImageForCarousel(imageSrc, slideElement, fallbackGradient) {
+            const testImg = new Image();
+            testImg.onload = function() {
+                slideElement.style.backgroundImage = `url('${imageSrc}')`;
+                slideElement.style.backgroundSize = 'cover';
+                slideElement.style.backgroundPosition = 'center';
+                slideElement.innerHTML = ''; // Remove fallback icon
+            };
+            testImg.onerror = function() {
+                // Keep the gradient fallback with icon
+                slideElement.style.background = fallbackGradient;
+                slideElement.innerHTML = '<i class="fas fa-image"></i>';
+            };
+            testImg.src = imageSrc;
+        }
+
+        // Enhanced Initialize individual product carousels with optimized timing
+        function initializeProductCarousel(productId) {
+            const container = document.querySelector(`.carousel-container[data-product-id="${productId}"]`);
+            const indicatorsContainer = document.querySelector(`.carousel-indicators[data-product-id="${productId}"]`);
+            
+            if (!container || !indicatorsContainer) return;
+            
+            const slides = container.querySelectorAll('.carousel-slide');
+            const indicators = indicatorsContainer.querySelectorAll('.indicator');
+            
+            let currentSlide = 0;
+            let autoPlayInterval;
+            let isPaused = false;
+            
+            function updateCarousel() {
+                // Update slides
+                slides.forEach((slide, index) => {
+                    slide.classList.remove('active', 'next', 'prev');
+                    if (index === currentSlide) {
+                        slide.classList.add('active');
+                    } else if (index === (currentSlide + 1) % slides.length) {
+                        slide.classList.add('next');
+                    } else {
+                        slide.classList.add('prev');
+                    }
+                });
+                
+                // Update indicators with proper synchronization
+                indicators.forEach((indicator, index) => {
+                    indicator.classList.toggle('active', index === currentSlide);
+                });
+            }
+            
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                updateCarousel();
+            }
+            
+            function goToSlide(index) {
+                currentSlide = index;
+                updateCarousel();
+            }
+            
+            // Optimized timing - faster but balanced
+            function startAutoPlay() {
+                if (!isPaused) {
+                    autoPlayInterval = setInterval(nextSlide, 2800); // Faster autoplay
+                }
+            }
+            
+            function stopAutoPlay() {
+                clearInterval(autoPlayInterval);
+            }
+            
+            // Enhanced indicator click handlers with optimized delays
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    stopAutoPlay();
+                    goToSlide(index);
+                    if (!isPaused) {
+                        setTimeout(startAutoPlay, 1200); // Faster resume
+                    }
+                });
+                
+                // Add hover effect with optimized timing
+                indicator.addEventListener('mouseenter', () => {
+                    if (!isPaused) {
+                        stopAutoPlay();
+                    }
+                });
+                
+                indicator.addEventListener('mouseleave', () => {
+                    if (!isPaused) {
+                        setTimeout(startAutoPlay, 600); // Faster hover resume
+                    }
+                });
+            });
+            
+            // Container hover pause functionality with optimized timing
+            container.addEventListener('mouseenter', () => {
+                isPaused = true;
+                stopAutoPlay();
+            });
+            
+            container.addEventListener('mouseleave', () => {
+                isPaused = false;
+                startAutoPlay();
+            });
+            
+            // Enhanced touch/swipe functionality with better responsiveness
+            let startX = 0;
+            let startY = 0;
+            let isDragging = false;
+            
+            container.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+                isDragging = true;
+                stopAutoPlay();
+            }, { passive: true });
+            
+            container.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                
+                const currentX = e.touches[0].clientX;
+                const currentY = e.touches[0].clientY;
+                const diffX = Math.abs(startX - currentX);
+                const diffY = Math.abs(startY - currentY);
+                
+                // Only prevent default if horizontal swipe
+                if (diffX > diffY) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            container.addEventListener('touchend', (e) => {
+                if (!isDragging) return;
+                isDragging = false;
+                
+                const endX = e.changedTouches[0].clientX;
+                const diffX = startX - endX;
+                
+                if (Math.abs(diffX) > 50) {
+                    if (diffX > 0) {
+                        nextSlide();
+                    } else {
+                        currentSlide = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+                        updateCarousel();
+                    }
+                }
+                
+                if (!isPaused) {
+                    setTimeout(startAutoPlay, 800); // Optimized touch resume
+                }
+            });
+            
+            // Start auto-play
+            startAutoPlay();
+            
+            // Store carousel reference with enhanced API
+            productCarousels[productId] = {
+                nextSlide,
+                goToSlide,
+                startAutoPlay,
+                stopAutoPlay,
+                getCurrentSlide: () => currentSlide
+            };
+        }
+
+        // Optimized scroll detection for filter bar
+        function initializeScrollHandling() {
+            const filterBar = document.getElementById('filterBar');
+            const productsSection = document.getElementById('products');
+            
+            let ticking = false;
+            
+            function handleScroll() {
+                if (!ticking) {
+                    requestAnimationFrame(() => {
+                        const scrollTop = window.scrollY;
+                        
+                        // Only show filter bar on main page
+                        if (document.getElementById('mainPage').style.display !== 'none') {
+                            const productsTop = productsSection.offsetTop - 200;
+                            const productsBottom = productsSection.offsetTop + productsSection.offsetHeight - 400;
+                            
+                            // Determine scroll direction
+                            if (scrollTop > lastScrollTop) {
+                                currentScrollDirection = 'down';
+                            } else {
+                                currentScrollDirection = 'up';
+                            }
+                            lastScrollTop = scrollTop;
+                            
+                            // Show filter bar only when scrolling up in products section
+                            if (scrollTop >= productsTop && scrollTop <= productsBottom && currentScrollDirection === 'up') {
+                                filterBar.classList.add('visible');
+                            } else {
+                                filterBar.classList.remove('visible');
+                            }
+                        }
+                        
+                        // Update scroll progress
+                        updateScrollProgress();
+                        
+                        // Update header background
+                        updateHeaderBackground();
+                        
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }
+            
+            window.addEventListener('scroll', handleScroll, { passive: true });
+        }
+
+        // Search functionality with debouncing
+        function initializeSearch() {
+            const searchInput = document.getElementById('searchInput');
+            let searchTimeout;
+            
+            searchInput.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    currentSearchTerm = this.value.toLowerCase();
+                    filterProducts();
+                }, 150); // Debounced search for better performance
+            });
+        }
+
+        // Category filter functionality
+        function initializeCategoryFilters() {
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Update active button
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update filter and search
+                    currentFilter = this.getAttribute('data-category');
+                    document.getElementById('searchInput').value = '';
+                    currentSearchTerm = '';
+                    filterProducts();
+                });
+            });
+        }
+
+        // Enhanced product filtering with better performance
+        function filterProducts() {
+            const productCards = document.querySelectorAll('.product-card');
+            const noResults = document.getElementById('noResults');
+            let visibleCount = 0;
+            
+            productCards.forEach(card => {
+                const title = card.querySelector('.product-title').textContent.toLowerCase();
+                const description = card.querySelector('.product-description').textContent.toLowerCase();
+                const category = card.getAttribute('data-category');
+                
+                const matchesSearch = currentSearchTerm === '' || 
+                    title.includes(currentSearchTerm) || 
+                    description.includes(currentSearchTerm);
+                
+                const matchesCategory = currentFilter === 'all' || category === currentFilter;
+                
+                if (matchesSearch && matchesCategory) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        // FAQ functionality
+        function initializeFAQ() {
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', () => {
+                    const faqItem = question.parentElement;
+                    const answer = faqItem.querySelector('.faq-answer');
+                    
+                    // Close other FAQ items
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        if (item !== faqItem) {
+                            item.classList.remove('active');
+                            item.querySelector('.faq-answer').classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current FAQ item
+                    faqItem.classList.toggle('active');
+                    answer.classList.toggle('active');
+                });
+            });
+        }
+
+        // Optimized Intersection Observer for animations
+        function initializeObserver() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -30px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Stop observing once animated
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Back to top functionality
+        function initializeBackToTop() {
+            const backToTopBtn = document.querySelector('.back-to-top');
+            let ticking = false;
+            
+            function handleBackToTopScroll() {
+                if (!ticking) {
+                    requestAnimationFrame(() => {
+                        if (window.scrollY > 300) {
+                            backToTopBtn.classList.add('visible');
+                        } else {
+                            backToTopBtn.classList.remove('visible');
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }
+            
+            window.addEventListener('scroll', handleBackToTopScroll, { passive: true });
+        }
+
+        // Mobile menu functionality
+        function initializeMobileMenu() {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mobileMenu = document.querySelector('.mobile-menu');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenuBtn.classList.toggle('active');
+                mobileMenu.style.display = mobileMenu.style.display === 'flex' ? 'none' : 'flex';
+            });
+
+            document.querySelectorAll('.mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuBtn.classList.remove('active');
+                    mobileMenu.style.display = 'none';
+                });
+            });
+        }
+
+        // Optimized utility functions
+        function updateScrollProgress() {
+            const scrollProgress = document.querySelector('.scroll-progress');
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = Math.min((scrollTop / docHeight) * 100, 100);
+            scrollProgress.style.width = scrollPercent + '%';
+        }
+
+        function updateHeaderBackground() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'var(--pure-white)';
+                header.style.backdropFilter = 'none';
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Product ordering
+        function orderProduct(productName, price) {
+            const message = `Hi! I'm interested in ordering the ${productName} (${price}). Could you provide more details about sizing, colors, and customization options?`;
+            const whatsappUrl = `https://wa.me/212123456789?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // WhatsApp contact
+        function openWhatsApp() {
+            const message = "Hi! I'd like to know more about your Moroccan caftans and jellabas. Can you help me choose the perfect piece?";
+            const whatsappUrl = `https://wa.me/212123456789?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Social media links
+        function openSocial(platform) {
+            const urls = {
+                instagram: 'https://www.instagram.com/nada_caftan_jellaba?igsh=cjczMXJhbGlsdXZu',
+                tiktok: 'https://www.tiktok.com/@nada_caftan_jellaba?_t=ZS-8yr6ERJrAsj&_r=1',
+                facebook: 'https://youtube.com/@nadacaftanjellaba'
+            };
+            window.open(urls[platform], '_blank');
+        }
+
+        // Smooth scrolling for navigation (only on main page)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // Only work on main page
+                if (document.getElementById('mainPage').style.display !== 'none') {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Optimized ripple effect for buttons
+        document.addEventListener('click', function(e) {
+            if (e.target.matches('.order-button, .cta-button, .whatsapp-button, .action-button')) {
+                const ripple = document.createElement('span');
+                const rect = e.target.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+                
+                e.target.style.position = 'relative';
+                e.target.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 500);
+            }
+        });
+
+        // Optimized parallax effect for hero section (only on main page)
+        let heroTicking = false;
+        
+        function handleHeroParallax() {
+            if (!heroTicking) {
+                requestAnimationFrame(() => {
+                    if (document.getElementById('mainPage').style.display !== 'none') {
+                        const scrolled = window.scrollY;
+                        const hero = document.querySelector('.hero');
+                        const heroContent = document.querySelector('.hero-content');
+                        
+                        if (hero && scrolled < hero.offsetHeight) {
+                            const parallaxOffset = scrolled * 0.3;
+                            const opacityValue = Math.max(0, 1 - scrolled / hero.offsetHeight);
+                            
+                            heroContent.style.transform = `translateY(${parallaxOffset}px)`;
+                            heroContent.style.opacity = opacityValue;
+                        }
+                    }
+                    heroTicking = false;
+                });
+                heroTicking = true;
+            }
+        }
+        
+        window.addEventListener('scroll', handleHeroParallax, { passive: true });
+
+        // Loading animation
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+
+        // Performance optimization: Preload critical images
+        function preloadCriticalImages() {
+            const criticalImages = [
+                'pic/one.jpg',
+                'pic/two.jpg',
+                'pic/three.jpg'
+            ];
+            
+            criticalImages.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
+        }
+        
+        // Preload on page load
+        window.addEventListener('load', preloadCriticalImages);
+
+        // Enhanced error handling
+        window.addEventListener('error', function(e) {
+            console.log('Resource loading error:', e.target.src || e.target.href);
+        });
+
+        // Service worker registration for offline support (optional)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                // Uncomment if you have a service worker
+                // navigator.serviceWorker.register('/sw.js');
+            });
+        }
+    </script>
+</body>
+</html>
